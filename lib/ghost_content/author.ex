@@ -19,6 +19,13 @@ defmodule GhostContent.Author do
             location: nil,
             facebook: nil,
             twitter: nil,
+            threads: nil,
+            bluesky: nil,
+            mastodon: nil,
+            tiktok: nil,
+            instagram: nil,
+            youtube: nil,
+            linkedin: nil,
             count: %{}
 
   @spec from_map!(map()) :: t()
