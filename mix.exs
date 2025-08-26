@@ -35,7 +35,7 @@ defmodule GhostContent.MixProject do
 
   defp deps do
     [
-      {:httpoison, "~> 1.7"},
+      {:httpoison, "~> 1.7 or ~> 2.2"},
       {:jason, "~> 1.2"},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},
       {:exvcr, "~> 0.14.4", only: :test}
