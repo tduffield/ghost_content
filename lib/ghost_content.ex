@@ -47,7 +47,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#posts
   """
-  @spec get_posts(config(), options() | nil) :: {:ok, %{meta: meta(), posts: [Post.t()]}}
+  @spec get_posts(config(), options() | nil) ::
+          {:ok, %{meta: meta(), posts: [Post.t()]}} | {:error, any()}
   def get_posts(config, opts \\ []) do
     case perform_request(config, "/ghost/api/content/posts/", opts) do
       {:ok, r = %{posts: posts}} ->
@@ -66,7 +67,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#posts
   """
-  @spec get_post(config(), String.t(), options() | nil) :: {:ok, %{posts: [Post.t()]}}
+  @spec get_post(config(), String.t(), options() | nil) ::
+          {:ok, %{posts: [Post.t()]}} | {:error, any()}
   def get_post(config, id, opts \\ []) do
     case perform_request(config, "/ghost/api/content/posts/#{id}/", opts) do
       {:ok, r = %{posts: posts}} ->
@@ -85,7 +87,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#posts
   """
-  @spec get_post_by_slug(config(), String.t(), options() | nil) :: {:ok, %{posts: [Post.t()]}}
+  @spec get_post_by_slug(config(), String.t(), options() | nil) ::
+          {:ok, %{posts: [Post.t()]}} | {:error, any()}
   def get_post_by_slug(config, slug, opts \\ []) do
     case perform_request(config, "/ghost/api/content/posts/slug/#{slug}/", opts) do
       {:ok, r = %{posts: posts}} ->
@@ -104,7 +107,7 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#pages
   """
-  @spec get_pages(config(), options() | nil) :: {:ok, %{pages: [Post.t()]}}
+  @spec get_pages(config(), options() | nil) :: {:ok, %{pages: [Post.t()]}} | {:error, any()}
   def get_pages(config, opts \\ []) do
     case perform_request(config, "/ghost/api/content/pages/", opts) do
       {:ok, r = %{pages: pages}} ->
@@ -123,7 +126,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#pages
   """
-  @spec get_page(config(), String.t(), options() | nil) :: {:ok, %{pages: [Post.t()]}}
+  @spec get_page(config(), String.t(), options() | nil) ::
+          {:ok, %{pages: [Post.t()]}} | {:error, any()}
   def get_page(config, id, opts \\ []) do
     case perform_request(config, "/ghost/api/content/pages/#{id}/", opts) do
       {:ok, r = %{pages: pages}} ->
@@ -142,7 +146,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#pages
   """
-  @spec get_page_by_slug(config(), String.t(), options() | nil) :: {:ok, %{pages: [Post.t()]}}
+  @spec get_page_by_slug(config(), String.t(), options() | nil) ::
+          {:ok, %{pages: [Post.t()]}} | {:error, any()}
   def get_page_by_slug(config, slug, opts \\ []) do
     case perform_request(config, "/ghost/api/content/pages/slug/#{slug}/", opts) do
       {:ok, r = %{pages: pages}} ->
@@ -161,7 +166,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#authors
   """
-  @spec get_authors(config(), options() | nil) :: {:ok, %{authors: [Author.t()]}}
+  @spec get_authors(config(), options() | nil) ::
+          {:ok, %{authors: [Author.t()]}} | {:error, any()}
   def get_authors(config, opts \\ []) do
     case perform_request(config, "/ghost/api/content/authors/", opts) do
       {:ok, r = %{authors: authors}} ->
@@ -180,7 +186,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#authors
   """
-  @spec get_author(config(), String.t(), options() | nil) :: {:ok, %{authors: [Author.t()]}}
+  @spec get_author(config(), String.t(), options() | nil) ::
+          {:ok, %{authors: [Author.t()]}} | {:error, any()}
   def get_author(config, id, opts \\ []) do
     case perform_request(config, "/ghost/api/content/authors/#{id}/", opts) do
       {:ok, r = %{authors: authors}} ->
@@ -200,7 +207,7 @@ defmodule GhostContent do
   For exact usage, see: https://ghost.org/docs/content-api/#authors
   """
   @spec get_author_by_slug(config(), String.t(), options() | nil) ::
-          {:ok, %{authors: [Author.t()]}}
+          {:ok, %{authors: [Author.t()]}} | {:error, any()}
   def get_author_by_slug(config, slug, opts \\ []) do
     case perform_request(config, "/ghost/api/content/authors/slug/#{slug}/", opts) do
       {:ok, r = %{authors: authors}} ->
@@ -219,7 +226,7 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#tags
   """
-  @spec get_tags(config(), options() | nil) :: {:ok, %{tags: [Tag.t()]}}
+  @spec get_tags(config(), options() | nil) :: {:ok, %{tags: [Tag.t()]}} | {:error, any()}
   def get_tags(config, opts \\ []) do
     case perform_request(config, "/ghost/api/content/tags/", opts) do
       {:ok, r = %{tags: tags}} ->
@@ -238,7 +245,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#tags
   """
-  @spec get_tag(config(), String.t(), options() | nil) :: {:ok, %{tags: [Tag.t()]}}
+  @spec get_tag(config(), String.t(), options() | nil) ::
+          {:ok, %{tags: [Tag.t()]}} | {:error, any()}
   def get_tag(config, id, opts \\ []) do
     case perform_request(config, "/ghost/api/content/tags/#{id}/", opts) do
       {:ok, r = %{tags: tags}} ->
@@ -257,7 +265,8 @@ defmodule GhostContent do
 
   For exact usage, see: https://ghost.org/docs/content-api/#tags
   """
-  @spec get_tag_by_slug(config(), String.t(), options() | nil) :: {:ok, %{tags: [Tag.t()]}}
+  @spec get_tag_by_slug(config(), String.t(), options() | nil) ::
+          {:ok, %{tags: [Tag.t()]}} | {:error, any()}
   def get_tag_by_slug(config, slug, opts \\ []) do
     case perform_request(config, "/ghost/api/content/tags/slug/#{slug}/", opts) do
       {:ok, r = %{tags: tags}} ->
