@@ -6,7 +6,12 @@ defmodule GhostContent do
   https://ghost.org/docs/content-api/
   """
 
-  @type config() :: [api_key: String.t(), host: String.t()]
+  @type config() :: [
+          api_key: String.t(),
+          host: String.t(),
+          timeout: integer() | nil,
+          recv_timeout: integer() | nil
+        ]
   @type options() :: [
           filter: String.t() | nil,
           include: String.t() | nil,
@@ -284,12 +289,20 @@ defmodule GhostContent do
       |> Map.put(:query, URI.encode_query(Map.merge(params, %{key: config[:api_key]})))
       |> URI.to_string()
 
+    http_opts =
+      []
+      |> maybe_add_option(:timeout, config[:timeout])
+      |> maybe_add_option(:recv_timeout, config[:recv_timeout])
+
     with {:ok, response = %HTTPoison.Response{status_code: 200}} <-
-           HTTPoison.get(uri_string),
+           HTTPoison.get(uri_string, [], http_opts),
          {:ok, data} <- Jason.decode(response.body, keys: :atoms) do
       {:ok, data}
     else
       {_, result} -> {:error, result}
     end
   end
+
+  defp maybe_add_option(opts, _key, nil), do: opts
+  defp maybe_add_option(opts, key, value), do: Keyword.put(opts, key, value)
 end
